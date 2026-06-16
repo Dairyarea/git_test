@@ -1,0 +1,21 @@
+{
+  "name": "fantasy-football",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=packages/api",
+    "dev:app": "npm run start --workspace=packages/app",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "build:api": "npm run build --workspace=packages/api",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "db:push": "npm run db:push --workspace=packages/api",
+    "db:migrate": "npm run db:migrate --workspace=packages/api",
+    "db:studio": "npm run db:studio --workspace=packages/api"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
