@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "npm run start:api",
     "dev:api": "npm run dev --workspace=packages/api",
     "dev:app": "npm run start --workspace=packages/app",
     "build:shared": "npm run build --workspace=packages/shared",
