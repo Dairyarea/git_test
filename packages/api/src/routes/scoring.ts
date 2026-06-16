@@ -34,7 +34,7 @@ export const scoringRoutes: FastifyPluginAsync = async (server) => {
 
     const weeklyStats = player.weeklyStats as Record<string, Partial<Record<keyof ScoringRules, number>>>;
     const stats = weeklyStats[week] || {};
-    const score = computePlayerScore(stats, scoringConfig.rules as ScoringRules, scoringConfig.bonuses as ScoringBonus[]);
+    const score = computePlayerScore(stats, scoringConfig.rules as unknown as ScoringRules, scoringConfig.bonuses as unknown as ScoringBonus[]);
 
     return { playerId, week, stats, score };
   });

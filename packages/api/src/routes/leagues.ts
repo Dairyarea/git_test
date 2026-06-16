@@ -64,7 +64,7 @@ export const leagueRoutes: FastifyPluginAsync = async (server) => {
       await tx.scoringConfig.create({
         data: {
           leagueId: league.id,
-          rules: DEFAULT_SCORING,
+          rules: DEFAULT_SCORING as object,
           bonuses: [],
           pprValue: 0,
         },

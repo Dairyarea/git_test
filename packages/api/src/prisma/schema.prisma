@@ -264,17 +264,95 @@ model WaiverClaim {
   @@index([teamId])
 }
 
-enum TradeVisibility { PUBLIC COMMISSIONER_ONLY TEAMS_ONLY }
-enum MemberRole    { COMMISSIONER MEMBER }
-enum DraftType     { SNAKE LINEAR AUCTION }
-enum DraftStatus   { PENDING LIVE COMPLETE }
-enum WaiverType    { FAAB ROLLING_PRIORITY INVERSE_STANDINGS }
-enum WaiverReset   { INVERSE_STANDINGS NO_CHANGE WAIVER_SUCCESS }
-enum PlayoffFormat { SINGLE_ELIMINATION DOUBLE_ELIMINATION TOTAL_POINTS }
-enum SlotStatus    { ACTIVE BENCH IR }
-enum AcquireType   { DRAFT WAIVER TRADE FREE_AGENT }
-enum Position      { QB RB WR TE K DEF }
-enum PlayerStatus  { ACTIVE INJURED OUT BYE SUSPENDED QUESTIONABLE DOUBTFUL }
-enum TradeStatus   { PENDING ACCEPTED REJECTED VETOED EXPIRED WITHDRAWN }
-enum WaiverStatus  { PENDING PROCESSED FAILED }
-enum VoteType      { VETO APPROVE }
+enum TradeVisibility {
+  PUBLIC
+  COMMISSIONER_ONLY
+  TEAMS_ONLY
+}
+
+enum MemberRole {
+  COMMISSIONER
+  MEMBER
+}
+
+enum DraftType {
+  SNAKE
+  LINEAR
+  AUCTION
+}
+
+enum DraftStatus {
+  PENDING
+  LIVE
+  COMPLETE
+}
+
+enum WaiverType {
+  FAAB
+  ROLLING_PRIORITY
+  INVERSE_STANDINGS
+}
+
+enum WaiverReset {
+  INVERSE_STANDINGS
+  NO_CHANGE
+  WAIVER_SUCCESS
+}
+
+enum PlayoffFormat {
+  SINGLE_ELIMINATION
+  DOUBLE_ELIMINATION
+  TOTAL_POINTS
+}
+
+enum SlotStatus {
+  ACTIVE
+  BENCH
+  IR
+}
+
+enum AcquireType {
+  DRAFT
+  WAIVER
+  TRADE
+  FREE_AGENT
+}
+
+enum Position {
+  QB
+  RB
+  WR
+  TE
+  K
+  DEF
+}
+
+enum PlayerStatus {
+  ACTIVE
+  INJURED
+  OUT
+  BYE
+  SUSPENDED
+  QUESTIONABLE
+  DOUBTFUL
+}
+
+enum TradeStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  VETOED
+  EXPIRED
+  WITHDRAWN
+}
+
+enum WaiverStatus {
+  PENDING
+  PROCESSED
+  FAILED
+}
+
+enum VoteType {
+  VETO
+  APPROVE
+}
