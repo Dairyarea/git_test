@@ -1,0 +1,61 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.scoringConfigSchema = exports.scoringBonusSchema = exports.scoringRulesSchema = void 0;
+const zod_1 = require("zod");
+exports.scoringRulesSchema = zod_1.z.object({
+    pass_yd: zod_1.z.number().min(-10).max(10),
+    pass_td: zod_1.z.number().min(-10).max(20),
+    pass_int: zod_1.z.number().min(-10).max(0),
+    pass_2pt: zod_1.z.number().min(0).max(10),
+    pass_inc: zod_1.z.number().min(-5).max(5),
+    pass_att: zod_1.z.number().min(-5).max(5),
+    rush_yd: zod_1.z.number().min(-10).max(10),
+    rush_td: zod_1.z.number().min(0).max(20),
+    rush_att: zod_1.z.number().min(-5).max(5),
+    rush_2pt: zod_1.z.number().min(0).max(10),
+    rec: zod_1.z.number().min(0).max(5),
+    rec_yd: zod_1.z.number().min(-10).max(10),
+    rec_td: zod_1.z.number().min(0).max(20),
+    rec_2pt: zod_1.z.number().min(0).max(10),
+    rec_target: zod_1.z.number().min(-5).max(5),
+    fg_made_0_39: zod_1.z.number().min(0).max(10),
+    fg_made_40_49: zod_1.z.number().min(0).max(10),
+    fg_made_50_59: zod_1.z.number().min(0).max(10),
+    fg_made_60_plus: zod_1.z.number().min(0).max(15),
+    fg_missed: zod_1.z.number().min(-10).max(0),
+    xp_made: zod_1.z.number().min(0).max(5),
+    xp_missed: zod_1.z.number().min(-5).max(0),
+    dst_sack: zod_1.z.number().min(0).max(10),
+    dst_int: zod_1.z.number().min(0).max(10),
+    dst_fumble_rec: zod_1.z.number().min(0).max(10),
+    dst_safety: zod_1.z.number().min(0).max(10),
+    dst_td: zod_1.z.number().min(0).max(20),
+    dst_blk: zod_1.z.number().min(0).max(10),
+    dst_pts_allowed_0: zod_1.z.number().min(0).max(20),
+    dst_pts_allowed_1_6: zod_1.z.number().min(0).max(20),
+    dst_pts_allowed_7_13: zod_1.z.number().min(-10).max(20),
+    dst_pts_allowed_14_20: zod_1.z.number().min(-10).max(20),
+    dst_pts_allowed_21_27: zod_1.z.number().min(-10).max(10),
+    dst_pts_allowed_28_34: zod_1.z.number().min(-10).max(5),
+    dst_pts_allowed_35_plus: zod_1.z.number().min(-10).max(0),
+    dst_yds_allowed_0_99: zod_1.z.number().min(-10).max(10),
+    dst_yds_allowed_100_199: zod_1.z.number().min(-10).max(10),
+    dst_yds_allowed_200_299: zod_1.z.number().min(-10).max(10),
+    dst_yds_allowed_300_399: zod_1.z.number().min(-10).max(10),
+    dst_yds_allowed_400_plus: zod_1.z.number().min(-10).max(10),
+    fumble_lost: zod_1.z.number().min(-10).max(0),
+    fumble: zod_1.z.number().min(-10).max(0),
+    return_td: zod_1.z.number().min(0).max(20),
+});
+exports.scoringBonusSchema = zod_1.z.object({
+    stat: zod_1.z.string(),
+    threshold: zod_1.z.number().min(1),
+    bonus: zod_1.z.number().min(0.25).max(50),
+    label: zod_1.z.string().optional(),
+});
+exports.scoringConfigSchema = zod_1.z.object({
+    rules: exports.scoringRulesSchema,
+    bonuses: zod_1.z.array(exports.scoringBonusSchema),
+    pprValue: zod_1.z.number().min(0).max(2),
+});
+//# sourceMappingURL=scoring.schema.js.map

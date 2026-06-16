@@ -1,5 +1,7 @@
 node_modules/
 dist/
+# Ship the compiled shared package so Railway can install it without needing tsc
+!packages/shared/dist/
 .expo/
 .env
 .env.local
