@@ -8,7 +8,9 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sync:players": "tsx src/scripts/sync-players.ts",
+    "sync:stats": "tsx src/scripts/sync-stats.ts"
   },
   "dependencies": {
     "@ff/shared": "*",

@@ -10,6 +10,7 @@ import { standingsRoutes } from './routes/standings';
 import { playerRoutes } from './routes/players';
 import { scoringRoutes } from './routes/scoring';
 import { authRoutes } from './routes/auth';
+import { adminRoutes } from './routes/admin';
 
 const server = Fastify({ logger: true });
 
@@ -26,7 +27,7 @@ server.addHook('onRequest', async (request: any, reply) => {
   const publicRoutes = ['/api/v1/auth/login', '/api/v1/auth/register', '/health'];
   if (publicRoutes.includes(request.url)) return;
   try {
-    const payload = await request.jwtVerify<{ sub: string; email: string }>() as any;
+    const payload = (await request.jwtVerify()) as any;
     request.userId = payload.sub;
     request.userEmail = payload.email;
   } catch {
@@ -45,6 +46,7 @@ server.register(waiverRoutes, { prefix: '/api/v1/leagues' });
 server.register(standingsRoutes, { prefix: '/api/v1/leagues' });
 server.register(playerRoutes, { prefix: '/api/v1/players' });
 server.register(scoringRoutes, { prefix: '/api/v1/leagues' });
+server.register(adminRoutes, { prefix: '/api/v1/admin' });
 
 const start = async () => {
   try {
