@@ -22,11 +22,13 @@ server.register(jwt, {
   secret: process.env.JWT_SECRET || 'change-me-in-production',
 });
 
-server.addHook('onRequest', async (request, reply) => {
+server.addHook('onRequest', async (request: any, reply) => {
   const publicRoutes = ['/api/v1/auth/login', '/api/v1/auth/register', '/health'];
   if (publicRoutes.includes(request.url)) return;
   try {
-    await request.jwtVerify();
+    const payload = await request.jwtVerify<{ sub: string; email: string }>() as any;
+    request.userId = payload.sub;
+    request.userEmail = payload.email;
   } catch {
     reply.code(401).send({ error: 'Unauthorized' });
   }
