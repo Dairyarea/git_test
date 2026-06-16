@@ -4,16 +4,37 @@ import { requireLeagueMember } from '../middleware/leagueAccess';
 
 const prisma = new PrismaClient();
 
+async function isCommissioner(leagueId: string, userId: string): Promise<boolean> {
+  const member = await prisma.leagueMember.findUnique({
+    where: { leagueId_userId: { leagueId, userId } },
+  });
+  return member?.role === 'COMMISSIONER';
+}
+
 export const rosterRoutes: FastifyPluginAsync = async (server) => {
   server.get('/:leagueId/teams', { preHandler: requireLeagueMember }, async (request: any) => {
     const { leagueId } = request.params;
-    return prisma.team.findMany({
+
+    const [settings, commissioner] = await Promise.all([
+      prisma.leagueSettings.findUnique({ where: { leagueId } }),
+      isCommissioner(leagueId, request.userId),
+    ]);
+
+    const anon = settings?.anonymousManagers && !commissioner;
+
+    const teams = await prisma.team.findMany({
       where: { leagueId },
       include: {
         owner: { select: { id: true, displayName: true, avatarUrl: true } },
       },
       orderBy: [{ wins: 'desc' }, { pointsFor: 'desc' }],
     });
+
+    if (!anon) return teams;
+    return teams.map((t) => ({
+      ...t,
+      owner: { id: t.owner.id, displayName: 'Manager', avatarUrl: null },
+    }));
   });
 
   server.get('/:leagueId/teams/mine', { preHandler: requireLeagueMember }, async (request: any) => {

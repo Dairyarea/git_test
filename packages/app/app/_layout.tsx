@@ -37,7 +37,7 @@ export default function RootLayout() {
             <Stack.Screen name="settings/league/roster" options={{ title: 'Roster Settings' }} />
             <Stack.Screen name="settings/league/draft" options={{ title: 'Draft Settings' }} />
             <Stack.Screen name="settings/league/playoffs" options={{ title: 'Playoff Settings' }} />
-            <Stack.Screen name="settings/league/trade" options={{ title: 'Trade Settings' }} />
+            <Stack.Screen name="settings/league/trade" options={{ title: 'Trade & Privacy' }} />
           </Stack>
         </QueryClientProvider>
       </SafeAreaProvider>

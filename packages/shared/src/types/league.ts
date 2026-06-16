@@ -5,6 +5,7 @@ export type WaiverType = 'FAAB' | 'ROLLING_PRIORITY' | 'INVERSE_STANDINGS';
 export type WaiverReset = 'INVERSE_STANDINGS' | 'NO_CHANGE' | 'WAIVER_SUCCESS';
 export type PlayoffFormat = 'SINGLE_ELIMINATION' | 'DOUBLE_ELIMINATION' | 'TOTAL_POINTS';
 export type Tiebreaker = 'POINTS_FOR' | 'HEAD_TO_HEAD' | 'BENCH_POINTS' | 'POINTS_AGAINST' | 'COIN_FLIP';
+export type TradeVisibility = 'PUBLIC' | 'COMMISSIONER_ONLY' | 'TEAMS_ONLY';
 
 export interface RosterSlotConfig {
   slot: string;
@@ -39,6 +40,10 @@ export interface LeagueSettings {
   tradeReviewPeriod: number;
   vetoThreshold: number;
   vetoVotingEnabled: boolean;
+  instantTrades: boolean;
+  tradeVisibility: TradeVisibility;
+  // Privacy
+  anonymousManagers: boolean;
   // Playoff
   playoffStartWeek: number;
   playoffTeamCount: number;
@@ -100,6 +105,9 @@ export const DEFAULT_LEAGUE_SETTINGS: LeagueSettings = {
   tradeReviewPeriod: 2,
   vetoThreshold: 4,
   vetoVotingEnabled: true,
+  instantTrades: false,
+  tradeVisibility: 'PUBLIC',
+  anonymousManagers: false,
   playoffStartWeek: 14,
   playoffTeamCount: 6,
   playoffFormat: 'SINGLE_ELIMINATION',

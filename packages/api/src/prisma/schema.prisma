@@ -70,10 +70,13 @@ model LeagueSettings {
   waiverDay          Int          @default(3)
   waiverOrderReset   WaiverReset  @default(INVERSE_STANDINGS)
   tradeDeadlineWeek  Int?
-  tradeReviewPeriod  Int          @default(2)
-  vetoThreshold      Int          @default(4)
-  vetoVotingEnabled  Boolean      @default(true)
-  playoffStartWeek   Int          @default(14)
+  tradeReviewPeriod  Int             @default(2)
+  vetoThreshold      Int             @default(4)
+  vetoVotingEnabled  Boolean         @default(true)
+  instantTrades      Boolean         @default(false)
+  tradeVisibility    TradeVisibility @default(PUBLIC)
+  anonymousManagers  Boolean         @default(false)
+  playoffStartWeek   Int             @default(14)
   playoffTeamCount   Int          @default(6)
   playoffFormat      PlayoffFormat @default(SINGLE_ELIMINATION)
   regularSeasonWeeks Int          @default(13)
@@ -218,6 +221,7 @@ model Trade {
   status           TradeStatus @default(PENDING)
   assets           Json
   notes            String?
+  instant          Boolean     @default(false)
   proposedAt       DateTime    @default(now())
   resolvedAt       DateTime?
   expiresAt        DateTime
@@ -260,6 +264,7 @@ model WaiverClaim {
   @@index([teamId])
 }
 
+enum TradeVisibility { PUBLIC COMMISSIONER_ONLY TEAMS_ONLY }
 enum MemberRole    { COMMISSIONER MEMBER }
 enum DraftType     { SNAKE LINEAR AUCTION }
 enum DraftStatus   { PENDING LIVE COMPLETE }
