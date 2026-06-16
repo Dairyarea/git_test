@@ -5,6 +5,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "start": "npm run start:api",
     "dev:api": "npm run dev --workspace=packages/api",
@@ -12,7 +16,7 @@
     "build:shared": "npm run build --workspace=packages/shared",
     "build:api": "npm run build:shared && npm run build --workspace=packages/api",
     "build": "npm run build:shared",
-    "start:api": "npm run build:shared && npx prisma db push --schema=packages/api/src/prisma/schema.prisma && npx tsx packages/api/src/server.ts",
+    "start:api": "npx prisma db push --schema=packages/api/src/prisma/schema.prisma && npx tsx packages/api/src/server.ts",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "db:push": "npm run db:push --workspace=packages/api",
     "db:migrate": "npm run db:migrate --workspace=packages/api",
